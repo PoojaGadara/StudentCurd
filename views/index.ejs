@@ -1,0 +1,59 @@
+<%- include('./partials/header.ejs') %>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 mt-5">
+                <h2 class="alert alert-success text-center">Add New Student</h2>
+                <form method="post">
+                    <div class="mb-3">
+                      <label class="form-label">Name</label>
+                      <input type="text" class="form-control" id="Name" name="Name" >
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Age</label>
+                      <input type="number" class="form-control" id="Age" name="Age">
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Fee</label>
+                        <input type="number" class="form-control" id="Fees" name="Fees">
+                      </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+            </div>
+            <div class="col-sm-6 mt-5">
+                <h2 class="alert alert-danger text-center">List Student</h2>
+                <table class="table table-success table-striped">
+                    <tr>
+                        <th>Sr</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Fees</th>
+                        <th>Action</th>
+                    </tr>
+                    <% var i=1 %>
+                    <% data.forEach((item) => { %>
+                    <tr>
+                        <td><%= i++ %></td>
+                        <td><%= item.Name%></td>
+                        <td><%= item.Age%></td>
+                        <td><%= item.Fees%></td>
+                        <td>
+                            <form action="/student/edit/<%= item._id %>" method="get" class="d-inline">
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fas fa-pen-square text-info"></i>
+                                </button>
+                              </form>
+                            
+                              <form action="/student/delete/<%= item._id %>" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-warning">
+                                  <i class="fas fa-trash text-danger"></i>
+                                </button>
+                              </form>
+                            
+                        </td>
+                    </tr>
+                    <% }) %>
+                  </table>
+            </div>
+        </div>
+    </div>
+<%- include('./partials/footer.ejs') %>   
